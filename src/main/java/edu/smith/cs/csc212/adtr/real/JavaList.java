@@ -6,7 +6,9 @@ import java.util.List;
 import edu.smith.cs.csc212.adtr.ListADT;
 
 /**
- * JavaList is a wrapper around Java's list as a ListADT and it gets specific if you ask it silly questions.
+ * JavaList is a wrapper around Java's list as a ListADT and it gets specific if
+ * you ask it silly questions.
+ * 
  * @author jfoley
  *
  * @param <T> - the type of the item stored in this list.
@@ -16,22 +18,23 @@ public class JavaList<T> extends ListADT<T> {
 	 * The Java object doing most of the work.
 	 */
 	private List<T> inner;
-	
+
 	/**
 	 * Construct an empty JavaList.
 	 */
 	public JavaList() {
 		this.inner = new ArrayList<T>();
 	}
-	
+
 	/**
 	 * Construct this list from existing data.
+	 * 
 	 * @param toCopy - the elements to copy.
 	 */
 	public JavaList(List<T> toCopy) {
 		this.inner = new ArrayList<T>(toCopy);
 	}
-	
+
 	@Override
 	public boolean isEmpty() {
 		return inner.isEmpty();
@@ -65,25 +68,23 @@ public class JavaList<T> extends ListADT<T> {
 	@Override
 	public T getBack() {
 		checkNotEmpty();
-		return inner.get(inner.size()-1);
+		return inner.get(inner.size() - 1);
 	}
 
 	@Override
 	public void addIndex(int index, T value) {
 		checkInclusiveIndex(index);
-		inner.add(index, value);	
+		inner.add(index, value);
 	}
 
 	@Override
 	public void addFront(T value) {
-		inner.add(0, value);	
+		inner.add(0, value);
 	}
 
 	@Override
 	public void addBack(T value) {
-		if (!inner.contains(value)) {
-			inner.add(value);		
-		}
+		inner.add(value);
 	}
 
 	@Override
@@ -96,7 +97,7 @@ public class JavaList<T> extends ListADT<T> {
 	@Override
 	public T removeBack() {
 		checkNotEmpty();
-		return inner.remove(inner.size()-1);
+		return inner.remove(inner.size() - 1);
 	}
 
 	@Override
@@ -104,6 +105,5 @@ public class JavaList<T> extends ListADT<T> {
 		checkNotEmpty();
 		return inner.remove(0);
 	}
-
 
 }

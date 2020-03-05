@@ -28,16 +28,14 @@ public class JavaMapTest {
 		MapADT<String, String> things = new JavaMap<>();
 		// size should give the number of keys
 		things.put("dog", "black dog");
-		assertFalse(things.size() == 2);
-		assertTrue(things.size() == 1);
+		assertEquals(things.size(), 1);
 	}
 
 	@Test
 	public void testPut() {
 		MapADT<String, String> things = new JavaMap<>();
 		things.put("dog", "black dog");
-		things.put("fish", "salmon");
-		assertTrue(things.size() == 2);	
+		assertEquals(things.get("dog"), "black dog");
 	}
 
 	@Test
@@ -46,11 +44,24 @@ public class JavaMapTest {
 		things.put("dog", "black dog");
 		things.put("fish", "salmon");
 		assertEquals(things.get("fish"), "salmon");
-		assertEquals(things.get("dog"), "black dog");
+	}
 
+	@Test
+	public void testGetNotIn() {
+		MapADT<String, String> things = new JavaMap<>();
+		things.put("dog", "black dog");
+		things.put("fish", "salmon");
+		assertNull(things.get("fruit"));
+	}
+
+	@Test
+	public void testGetOverride() {
+		MapADT<String, String> things = new JavaMap<>();
+		things.put("dog", "black dog");
+		things.put("fish", "salmon");
 		// the new value of the same key overwrites the first value
 		things.put("dog", "white dog");
-		assertFalse(things.get("dog") == "black dog");
+		assertEquals(things.get("dog"), "white dog");
 	}
 
 	@Test
@@ -62,9 +73,17 @@ public class JavaMapTest {
 		// remove using a key
 		things.remove("fish");
 		assertNull(things.get("fish"));
+	}
+
+	@Test
+	public void testRemoveValue() {
+		MapADT<String, String> things = new JavaMap<>();
+		things.put("dog", "black dog");
+		things.put("fish", "salmon");
 
 		// if you want to remove using a value, it shouldn't work
-		things.remove("black dog");
+		String k = things.remove("black dog");
+		assertEquals(k, null);
 		assertEquals(things.get("dog"), "black dog");
 	}
 }
